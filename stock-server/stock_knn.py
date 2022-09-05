@@ -121,7 +121,7 @@ class Stock_Price:
         result = pd.DataFrame(
             {'High-EMA-'+str(ema): predicted,  'Adj Close': y_test.round(2)})
 
-        return result.to_json()
+        return result.to_json(orient= "index",date_format="iso" )
 
     def get_stock_price_data(self, ticker):
         end_date = date.today()
