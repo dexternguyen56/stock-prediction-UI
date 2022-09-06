@@ -107,11 +107,9 @@ const sendTicker = () =>{
     chart()
   },[]);
 
-
-
   return (
     <div className="App">
-<form>
+      <form style={{display:"flex",justifyContent:"center"}}>
       <label>Ticker&emsp;
         <input 
           type="text" 
@@ -124,6 +122,8 @@ const sendTicker = () =>{
     </form>
    
         
+    
+
        <LineChart  chartData={chartData}  />
     </div>
   )
