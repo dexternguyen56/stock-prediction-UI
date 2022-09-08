@@ -24,7 +24,8 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 class Stock_Price:
     def __init__(self, ticker, ratio):
-
+        self.valid_ticker = False
+        
         self.df = self.get_stock_price_data(ticker)
 
         self.ratio = ratio
@@ -72,7 +73,7 @@ class Stock_Price:
 
         # print(result)
 
-        return result.to_json(orient= "index",date_format="iso" )
+        return result.to_json(orient="index", date_format="iso")
 
     def high_ema(self, ema):
         # -----------------High and EMA------------------------
@@ -121,7 +122,7 @@ class Stock_Price:
         result = pd.DataFrame(
             {'High-EMA-'+str(ema): predicted,  'Adj Close': y_test.round(2)})
 
-        return result.to_json(orient= "index",date_format="iso" )
+        return result.to_json(orient="index", date_format="iso")
 
     def get_stock_price_data(self, ticker):
         end_date = date.today()
@@ -136,6 +137,7 @@ class Stock_Price:
         print("RMSE: ", math.sqrt(mean_squared_error(predicted, adj_price)))
         print("R2:   ", r2_score(predicted, adj_price))
 
+    
     # ticker = input("Enter the stock ticker: ")
 
     # high_low = prediction.high_low()

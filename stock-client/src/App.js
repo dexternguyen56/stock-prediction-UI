@@ -25,44 +25,31 @@ function App() {
     ]
   };
 
-  const [chartData, setChartData] = useState([data]);
-  const [ticker,setTicker] = useState("")
+  const [chartData, setChartData] = useState([]);
+  const [ticker,setTicker] = useState("GOOGL")
+  const [title,setTitle]= useState(ticker)
+  const [load,setLoad] = useState(true)
 
 
   
 
   const chart = () =>{
-
+    setLoad(true)
     fetch("/home")
     .then((res) => res.json())
     .then((data) => {
-      format_chartData(data)
-      
-        // time = Object.entries(data).map(([id]) => (moment(id).format('YYYY-MM-DD')))
-        // predicted = Object.entries(data).map(([id,item]) => (item.Predicted))
-        // actual = Object.entries(data).map(([id,item]) => (item.Actual))
-        
 
-        // setChartData({
-        //   labels: time,
-        //   datasets: [
-        //     {
-        //       label: "Predicted",
-        //       data: predicted,
-        //       borderColor: "rgba(75,192,192,1)"
-        //     },
-        //     {
-        //       label: "Actual",
-        //       data: actual,
-        //       fill: false,
-        //       borderColor: "#742774"
-        //     }
-        //   ]
-        // })
+      format_chartData(data)
+      setLoad(false)
     });
   }
 
   const format_chartData = (data) =>{
+
+    // console.log(Object.entries(data))
+    // console.log(Object.entries(data["0"]))
+
+
     let time = Object.entries(data).map(([id]) => (moment(id).format('YYYY-MM-DD')))
     let predicted = Object.entries(data).map(([id,item]) => (item.Predicted))
     let actual = Object.entries(data).map(([id,item]) => (item.Actual))
@@ -93,6 +80,7 @@ const sendTicker = () =>{
 })
   .then(function (response) {
     format_chartData(response.data)
+    setTitle(ticker)
     console.log(response);
   })
   .catch(function (error) {
@@ -107,24 +95,40 @@ const sendTicker = () =>{
     chart()
   },[]);
 
+  if(load){
+    return <div>Loading...</div>
+  }
+
+  const something=(event)=> {
+
+    if (event.key === "Enter") {
+        sendTicker()
+    }
+}
+  
+  
+
   return (
     <div className="App">
-      <form style={{display:"flex",justifyContent:"center"}}>
-      <label>Ticker&emsp;
+      <div  style={{display:"flex",justifyContent:"center"}}> 
+      <label >Ticker&emsp;
         <input 
           type="text" 
           value={ticker}
-          onChange={(e) => setTicker(e.target.value)}
+           onChange={(e) => setTicker(e.target.value)}
+          onKeyDown={(e) => something(e) }
         />
        
       </label>
       <button type="button" onClick={sendTicker} className="button-80">Change</button>
-    </form>
+  
    
+      </div>
+  
         
     
 
-       <LineChart  chartData={chartData}  />
+       <LineChart  chartData={chartData} title ={title}  />
     </div>
   )
 }
