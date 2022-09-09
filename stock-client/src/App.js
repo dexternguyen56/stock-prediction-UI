@@ -27,7 +27,7 @@ function App() {
   //   ]
   // };
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const api = "http://stockprediction-env-2.eba-fnpxwwwe.us-west-1.elasticbeanstalk.com/"
+  const api = "https://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com"
 
   const [chartData, setChartData] = useState([]);
   const [ticker,setTicker] = useState("GOOGL")

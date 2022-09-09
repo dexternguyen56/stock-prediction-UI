@@ -25,7 +25,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 class Stock_Price:
     def __init__(self, ticker, ratio):
         self.valid_ticker = False
-        
+
         self.df = self.get_stock_price_data(ticker)
 
         self.ratio = ratio
@@ -137,7 +137,6 @@ class Stock_Price:
         print("RMSE: ", math.sqrt(mean_squared_error(predicted, adj_price)))
         print("R2:   ", r2_score(predicted, adj_price))
 
-    
     # ticker = input("Enter the stock ticker: ")
 
     # high_low = prediction.high_low()
