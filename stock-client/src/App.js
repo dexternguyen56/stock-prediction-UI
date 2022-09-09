@@ -5,25 +5,29 @@ import axios from 'axios';
 import "./styles.css"
 
 
+
+
 function App() {
-  const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    datasets: [
-      {
-        label: "First dataset",
-        data: [33, 53, 85, 41, 44, 65],
-        fill: true,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)"
-      },
-      {
-        label: "Second dataset",
-        data: [33, 25, 35, 51, 54, 76],
-        fill: false,
-        borderColor: "#742774"
-      }
-    ]
-  };
+  // const data = {
+  //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  //   datasets: [
+  //     {
+  //       label: "First dataset",
+  //       data: [33, 53, 85, 41, 44, 65],
+  //       fill: true,
+  //       backgroundColor: "rgba(75,192,192,0.2)",
+  //       borderColor: "rgba(75,192,192,1)"
+  //     },
+  //     {
+  //       label: "Second dataset",
+  //       data: [33, 25, 35, 51, 54, 76],
+  //       fill: false,
+  //       borderColor: "#742774"
+  //     }
+  //   ]
+  // };
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const api = "http://stockprediction-env-2.eba-fnpxwwwe.us-west-1.elasticbeanstalk.com/"
 
   const [chartData, setChartData] = useState([]);
   const [ticker,setTicker] = useState("GOOGL")
@@ -35,7 +39,7 @@ function App() {
 
   const chart = () =>{
     setLoad(true)
-    fetch("/home")
+    fetch(api + "/home")
     .then((res) => res.json())
     .then((data) => {
 
@@ -74,7 +78,7 @@ function App() {
 
 
 const sendTicker = () =>{
-  axios.post('/home',{
+  axios.post(api+'/home',{
     ticker: ticker,
     option: 1
 })
