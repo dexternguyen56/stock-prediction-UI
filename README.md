@@ -1,6 +1,7 @@
 
 # 📈 Stock-Price-Prediction
 An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.
+
 Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2
 
 Group Project to predict stock price with K-nearest neighbors Regression (KNN), Linear Regression, and Long Short Term Memory (LSTM).
