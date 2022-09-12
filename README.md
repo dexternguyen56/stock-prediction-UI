@@ -1,8 +1,10 @@
 
 # 📈 Stock-Price-Prediction
-An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.https://github.com/dexternguyen56/Stock-Price-Prediction
 
-Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2
+# Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2
+
+An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.
+
 
 Group Project to predict stock price with K-nearest neighbors Regression (KNN), Linear Regression, and Long Short Term Memory (LSTM).
 We decided to use the Pandas DataReader to download data based
@@ -29,7 +31,7 @@ more bias to the current price.
 <hr>
 <img src="https://user-images.githubusercontent.com/58058227/154827307-e6949b5d-31df-4a70-9d88-5fc5f0f7d3f9.png" style="width=300px;height:auto;">
 
-
+https://github.com/dexternguyen56/Stock-Price-Prediction
 # Collaborators:
 Tran Nguyen
 
