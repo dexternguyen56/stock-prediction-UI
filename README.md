@@ -4,11 +4,11 @@
 
 
 
-Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2
+**Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2**
 
 An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.
 
-I'm working to fix some issue with SSL certificate and set up the server to listen to Https correctly on AWS
+**I'm working to fix some issue with SSL certificate and set up the server to listen to https correctly on AWS**
 
 Group Project to predict stock price with K-nearest neighbors Regression (KNN), Linear Regression, and Long Short Term Memory (LSTM).
 We decided to use the Pandas DataReader to download data based
