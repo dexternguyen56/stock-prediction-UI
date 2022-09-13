@@ -1,6 +1,9 @@
 
 # 📈 Stock-Price-Prediction
 
+![image](https://user-images.githubusercontent.com/58058227/190020954-3ba6512d-4a76-4c1d-9f99-fc950aae0439.png)
+
+
 Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2
 
 An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.
