@@ -26,9 +26,10 @@ function App() {
   //     }
   //   ]
   // };
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const api = "https://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com"
+  
+  const api = "http://127.0.0.1:5000/"
 
+  //const api = "http://127.0.0.1:5000"
   const [chartData, setChartData] = useState([]);
   const [ticker,setTicker] = useState("GOOGL")
   const [title,setTitle]= useState(ticker)
@@ -78,9 +79,10 @@ function App() {
 
 
 const sendTicker = () =>{
-  axios.post(api+'/home',{
-    ticker: ticker,
-    option: 1
+  axios.get(api+'symbol',{
+    params:{
+      ticker: ticker
+    }
 })
   .then(function (response) {
     format_chartData(response.data)
