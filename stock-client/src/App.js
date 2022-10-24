@@ -27,7 +27,7 @@ function App() {
   //   ]
   // };
   
-  const api = "http://127.0.0.1:5000/"
+  const api = "http://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com/"
 
   //const api = "http://127.0.0.1:5000"
   const [chartData, setChartData] = useState([]);
