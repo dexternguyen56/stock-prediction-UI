@@ -1,7 +1,7 @@
 import React,{useState,useEffect, useRef} from 'react'
 import moment from "moment"
 import LineChart from './components/lineChart';
-
+import TableChart from './components/TableChart';
 import axios from 'axios';
 import "./styles.css"
 
@@ -111,7 +111,7 @@ const sendTicker = () =>{
 })
   .then(function (response) {
     format_chartData(response.data)
-    console.log(response);
+    getStockInfo()
   })
   .catch(function (error) {
     console.log(error);
@@ -127,7 +127,6 @@ const getStockInfo = () =>{
     }
 })
   .then(function (response) {
-    
     setTitle(response.data['title'])
   })
   .catch(function (error) {
@@ -173,16 +172,14 @@ const handleStock =() => {
         />
        
       </label>
-      <button type="button" onClick={handleStock} className="button-80">Change</button>
+      <button type="button" onClick={sendTicker} className="button-80">Change</button>
   
       </div>
       <div style={{"height": "500px"}}>
         <LineChart  chartData={chartData} title ={title}  />
+        {/* <TableChart/> */}
       </div>
 
-      {/* <TableChart/> */}
-     
-     
     </div>
   )
 }

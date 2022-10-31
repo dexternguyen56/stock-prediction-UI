@@ -142,7 +142,7 @@ class Stock_Price:
         
         res = [MAE,RMSE,R2]
         res = [ round(x,2) for x in res]
-        return res
+        return {"MAE": res[0], "RMSE": res[1], "R2": res[2]}
         
 
 
