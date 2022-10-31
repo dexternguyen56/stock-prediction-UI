@@ -162,23 +162,28 @@ const handleStock =() => {
 
   return (
     <div className="App">
-      <div  style={{display:"flex",justifyContent:"center"}}> 
-      <label >Ticker&emsp;
-        <input 
-          type="text" 
-          value={ticker}
-           onChange={(e) => setTicker(e.target.value.toUpperCase())}
-          onKeyDown={(e) => something(e) }
-        />
-       
-      </label>
-      <button type="button" onClick={sendTicker} className="button-80">Change</button>
+      <div  style={{display:"flex",justifyContent:"center", color: "dodgerblue"}}> 
+        <label >Ticker&emsp;
+          <input 
+            type="text" 
+            value={ticker}
+            onChange={(e) => setTicker(e.target.value.toUpperCase())}
+            onKeyDown={(e) => something(e) }
+          />
+        
+        </label>
+        <button type="button" onClick={sendTicker} className="button-80">Change</button>
   
       </div>
       <div style={{"height": "500px"}}>
         <LineChart  chartData={chartData} title ={title}  />
-        {/* <TableChart/> */}
+       
       </div>
+
+      <div  style={{"margin": "20px"}}>
+        <TableChart/>
+      </div>
+      
 
     </div>
   )

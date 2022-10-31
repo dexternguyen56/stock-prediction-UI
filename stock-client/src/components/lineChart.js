@@ -43,10 +43,14 @@ function LineChart({chartData,title}){
         plugins: {
             title: {
                 display: true,
-                text:  {title}["title"]
+                text:  {title}["title"],
+                font: {
+                    size: 15,
+              
+                }
             },
             legend:{
-                position : 'top',
+                position : 'right',
                 align: 'center',
                 fill : true
             }

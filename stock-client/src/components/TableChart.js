@@ -1,36 +1,55 @@
-import Table from 'react-bootstrap/Table';
+import React, { Fragment } from 'react';
+import './App.scss';
 
-function TableChart() {
+
+import Table from './Table';
+
+
+const tracksData = [
+  {
+    name: 'Spa-Francorchamps',
+    country: 'Belgium',
+    length: 7.004,
+    numberOfLaps: 44
+  },
+  {
+    name: 'Circuit de Monaco',
+    country: 'Monaco',
+    length: 3.337,
+    numberOfLaps: 78
+  },
+  {
+    name: 'Silverstone',
+    country: 'England',
+    length: 5.891,
+    numberOfLaps: 52
+  },
+  {
+    name: 'Suzuka',
+    country: 'Japan',
+    length: 5.807,
+    numberOfLaps: 53
+  },
+  {
+    name: 'Hockenheimring',
+    country: 'Germany',
+    length: 4.574,
+    numberOfLaps: 67
+  },
+];
+
+const TableChart = (props) => {
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
+    <Fragment>
+     
+
+      <Table 
+        tableData={tracksData}
+        headingColumns={['Features', 'Mean Absolute Error (MAE)', 'Root Mean Squared Error (RMSE)', 'Coefficient of determination (R2)']}
+        title="Models Performance"
+        breakOn="small"
+      />
+    </Fragment>
   );
 }
 
