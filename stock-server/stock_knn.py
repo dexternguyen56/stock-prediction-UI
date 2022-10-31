@@ -70,10 +70,11 @@ class Stock_Price:
 
         result = pd.DataFrame(
             {'Predicted': predicted,  'Actual': y_test.round(2)})
+        result = result.iloc[61: , :]
 
         # print(result)
 
-        return result.to_json(orient="index", date_format="iso")
+        return result
 
     def high_ema(self, ema):
         # -----------------High and EMA------------------------
@@ -120,9 +121,11 @@ class Stock_Price:
         predicted = [round(price, 2) for price in predict.tolist()]
 
         result = pd.DataFrame(
-            {'High-EMA-'+str(ema): predicted,  'Adj Close': y_test.round(2)})
-
-        return result.to_json(orient="index", date_format="iso")
+            {'EMA': predicted,  'Actual': y_test.round(2)})
+        
+        result = result.iloc[59: , :]
+        
+        return result
 
     def get_stock_price_data(self, ticker):
         end_date = date.today()
@@ -133,9 +136,15 @@ class Stock_Price:
         return df
 
     def performance(self, predicted, adj_price):
-        print("MAE:  ", mean_absolute_error(predicted, adj_price))
-        print("RMSE: ", math.sqrt(mean_squared_error(predicted, adj_price)))
-        print("R2:   ", r2_score(predicted, adj_price))
+        MAE = mean_absolute_error(predicted, adj_price)
+        RMSE = math.sqrt(mean_squared_error(predicted, adj_price))
+        R2 =  r2_score(predicted, adj_price)
+        
+        res = [MAE,RMSE,R2]
+        res = [ round(x,2) for x in res]
+        return res
+        
+
 
     # ticker = input("Enter the stock ticker: ")
 

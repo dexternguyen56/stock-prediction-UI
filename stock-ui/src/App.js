@@ -1,6 +1,7 @@
 import React,{useState,useEffect, useRef} from 'react'
 import moment from "moment"
 import LineChart from './components/lineChart';
+
 import axios from 'axios';
 import "./styles.css"
 
@@ -27,12 +28,13 @@ function App() {
   //   ]
   // };
   
-  const api = "http://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com/"
+  //const api = "http://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com/"
 
-  //const api = "http://127.0.0.1:5000"
+  const api = "http://127.0.0.1:5000"
   const [chartData, setChartData] = useState([]);
   const [ticker,setTicker] = useState("GOOGL")
-  const [title,setTitle]= useState(ticker)
+  const [ema,setEMA] = useState("10")
+  const [title,setTitle]= useState("Alphabet Inc.")
   const [load,setLoad] = useState(true)
 
 
@@ -51,26 +53,46 @@ function App() {
 
   const format_chartData = (data) =>{
 
-    // console.log(Object.entries(data))
-    // console.log(Object.entries(data["0"]))
 
-
-    let time = Object.entries(data).map(([id]) => (moment(id).format('YYYY-MM-DD')))
+    let time = Object.entries(data).map(([id]) => (moment(id).format('MM/DD/YY')))
     let predicted = Object.entries(data).map(([id,item]) => (item.Predicted))
     let actual = Object.entries(data).map(([id,item]) => (item.Actual))
+    let emaData = Object.entries(data).map(([id,item]) => (item.EMA))
+    
     setChartData({
       labels: time,
       datasets: [
+
         {
-          label: "Predicted",
-          data: predicted,
-          borderColor: "rgba(75,192,192,1)"
-        },
-        {
-          label: "Actual",
+          label: "Adj Close",
           data: actual,
           fill: false,
-          borderColor: "#742774"
+          borderColor: "#742774",
+          backgroundColor:  "#742774",
+          pointBackgroundColor: "#742774",
+          pointBorderColor: "#000",
+          pointBorderWidth: 0.2
+        },
+
+        {
+          label: "High-Low",
+          data: predicted,
+          borderColor: "rgba(75,192,192,0.4)",
+          backgroundColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "rgba(75,192,192,0.4)",
+          pointBorderColor: "rgb(0,0,0,0.4)",
+          pointBorderWidth: 0.2
+        },
+
+
+        {
+          label: "High-EMA(" + ema +")",
+          data: emaData,
+          borderColor: 	"rgb(255,165,0,0.4)",
+          backgroundColor:"rgb(255,165,0,1)", 
+          pointBackgroundColor: "rgb(255,165,0,0.4)",
+          pointBorderColor: "rgb(0,0,0,0.4)",
+          pointBorderWidth: 0.2
         }
       ]
     })
@@ -79,14 +101,16 @@ function App() {
 
 
 const sendTicker = () =>{
-  axios.get(api+'symbol',{
-    params:{
-      ticker: ticker
+  axios.post(api+'/symbol',{
+    params :{
+    
+      ticker: ticker,
+      ema: ema
     }
+    
 })
   .then(function (response) {
     format_chartData(response.data)
-    setTitle(ticker)
     console.log(response);
   })
   .catch(function (error) {
@@ -94,12 +118,28 @@ const sendTicker = () =>{
   });
 }
 
+const getStockInfo = () =>{
+  axios.get(api+'/title',{
+    params :{
+    
+      ticker: ticker
 
+    }
+})
+  .then(function (response) {
+    
+    setTitle(response.data['title'])
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
 
   useEffect(() => {
     chart()
   },[]);
+  
 
   if(load){
     return <div>Loading...</div>
@@ -109,7 +149,14 @@ const sendTicker = () =>{
 
     if (event.key === "Enter") {
         sendTicker()
+        getStockInfo()
     }
+}
+
+const handleStock =() => {
+  sendTicker()
+  getStockInfo()
+  
 }
   
   
@@ -126,15 +173,16 @@ const sendTicker = () =>{
         />
        
       </label>
-      <button type="button" onClick={sendTicker} className="button-80">Change</button>
+      <button type="button" onClick={handleStock} className="button-80">Change</button>
   
-   
       </div>
-  
-        
-    
+      <div style={{"height": "500px"}}>
+        <LineChart  chartData={chartData} title ={title}  />
+      </div>
 
-       <LineChart  chartData={chartData} title ={title}  />
+      {/* <TableChart/> */}
+     
+     
     </div>
   )
 }
