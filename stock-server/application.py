@@ -22,7 +22,7 @@ CORS(application)
 SPLIT_RATIO = 0.85
 
 #DB
-cluster = MongoClient("mongodb+srv://stockpriceprediction:stockpriceprediction@stock.nicsij0.mongodb.net/?retryWrites=true&w=majority")
+cluster = MongoClient()
 db = cluster["stock-data"]
 collection = db["symbol"]
 
