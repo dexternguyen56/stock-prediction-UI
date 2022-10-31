@@ -21,7 +21,7 @@ function LineChart({chartData,title}){
                     display: true,
                     text: 'Date',
                     font: {
-                        size: 15,
+                        size: 20,
                     },
                     color: '#000'
        
@@ -33,7 +33,7 @@ function LineChart({chartData,title}){
                     display: true,
                     text: 'Price',
                     font: {
-                        size: 15,
+                        size: 20,
                   
                     },
                     color: '#000'

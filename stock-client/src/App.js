@@ -6,34 +6,34 @@ import axios from 'axios';
 import "./styles.css"
 
 
+const testData = [
+  {
+    Feature: 'H-Low',
+    EMA: '0',
+    RMSE: '0',
+    R2 : '0'
+  },
+  {
+    Feature: 'H-EMA',
+    EMA: '0',
+    RMSE: '0',
+    R2 : '0'
+  }
+];
+
 
 
 function App() {
-  // const data = {
-  //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  //   datasets: [
-  //     {
-  //       label: "First dataset",
-  //       data: [33, 53, 85, 41, 44, 65],
-  //       fill: true,
-  //       backgroundColor: "rgba(75,192,192,0.2)",
-  //       borderColor: "rgba(75,192,192,1)"
-  //     },
-  //     {
-  //       label: "Second dataset",
-  //       data: [33, 25, 35, 51, 54, 76],
-  //       fill: false,
-  //       borderColor: "#742774"
-  //     }
-  //   ]
-  // };
+
+
   
   //const api = "http://stockprediction-env.eba-xfsucpdb.us-west-1.elasticbeanstalk.com/"
 
   const api = "http://127.0.0.1:5000"
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState(testData);
+  const [stockMetrics, setStockMetrics] = useState(testData);
   const [ticker,setTicker] = useState("GOOGL")
-  const [ema,setEMA] = useState("10")
+  const [ema,setEMA] = useState("5")
   const [title,setTitle]= useState("Alphabet Inc.")
   const [load,setLoad] = useState(true)
 
@@ -47,6 +47,8 @@ function App() {
     .then((data) => {
 
       format_chartData(data)
+      getStockInfo()
+      getStockMetrics()
       setLoad(false)
     });
   }
@@ -112,22 +114,37 @@ const sendTicker = () =>{
   .then(function (response) {
     format_chartData(response.data)
     getStockInfo()
+    getStockMetrics()
   })
   .catch(function (error) {
     console.log(error);
   });
 }
 
+
+
 const getStockInfo = () =>{
   axios.get(api+'/title',{
     params :{
-    
       ticker: ticker
-
     }
 })
   .then(function (response) {
     setTitle(response.data['title'])
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+const getStockMetrics = () =>{
+  axios.get(api+'/metrics',{
+    params :{
+      ticker: ticker
+    }
+})
+  .then(function (response) {
+    setStockMetrics(response.data['metrics'])
   })
   .catch(function (error) {
     console.log(error);
@@ -175,13 +192,13 @@ const handleStock =() => {
         <button type="button" onClick={sendTicker} className="button-80">Change</button>
   
       </div>
-      <div style={{"height": "500px"}}>
+      <div style={{"height": "420px"}}>
         <LineChart  chartData={chartData} title ={title}  />
        
       </div>
 
       <div  style={{"margin": "20px"}}>
-        <TableChart/>
+        <TableChart stockMetrics={stockMetrics} />
       </div>
       
 
