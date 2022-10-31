@@ -168,7 +168,7 @@ const handleStock =() => {
         <input 
           type="text" 
           value={ticker}
-           onChange={(e) => setTicker(e.target.value)}
+           onChange={(e) => setTicker(e.target.value.toUpperCase())}
           onKeyDown={(e) => something(e) }
         />
        
