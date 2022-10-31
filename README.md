@@ -4,7 +4,7 @@
 
 
 
-**Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2**
+**Visualized stock prediction model with React and Three.js and deployed the ML server with Flask on Amazon EC2 and MongoDB**
 
 An enhancement to the collaborative project to predict stock price using Regression and Neural Network Models.
 
