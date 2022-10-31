@@ -1,6 +1,6 @@
 
 # 📈 Stock-Price-Prediction
-![image](https://user-images.githubusercontent.com/58058227/190021099-770433ef-9470-498d-af9d-6030b0387aca.png)
+<img width="919" alt="image" src="https://user-images.githubusercontent.com/58058227/198963637-740eed92-5915-4110-8ef7-0be04edcd566.png">
 
 
 
@@ -31,8 +31,6 @@ only use n = 2 features since all data points are located in
 n-dimensional space. This program will test K-neighbor from 1 to 25 and refit
 the model using negative MAE scoring  for the best result since further neighbors will introduce
 more bias to the current price.
-<img width="919" alt="image" src="https://user-images.githubusercontent.com/58058227/198963637-740eed92-5915-4110-8ef7-0be04edcd566.png">
-
 
 https://github.com/dexternguyen56/Stock-Price-Prediction
 # Collaborators:
